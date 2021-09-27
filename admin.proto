@@ -1,0 +1,59 @@
+syntax= "proto3";
+package grpc_package;
+import "google/protobuf/wrappers.proto";
+service Chat {
+
+    
+message Users {
+    string firstname=1;
+    string lastname=2;
+    string email=3;
+    string function=4;
+
+}
+
+message CreateRequest {
+    string firstname=1;
+}
+
+message AddRequest{
+    string AddNewFunction=1;
+    string AddFunction=2;
+}
+
+message AddResponse {
+    string AddNewFunction=1;
+    string AddFunction=2;
+}
+
+message DeleteRequest {
+    string DeleteFunction=1;
+}
+
+message DeleteResponse {
+    string DeleteFunction=1;
+}
+
+message ShowRequest {
+    string ShowFunction=1;
+    string ShowAllFunctions=2;
+    string ShowAllWithCriteria=3;
+}
+
+message ShowResponse {
+    string ShowFunction=1;
+    string ShowAllFunctions=2;
+    string ShowAllWithCriteria=3;
+}
+message ChatMessage {
+	string name = 1;
+	string message = 2;
+}
+
+service AdminService{
+    rpc add (AddRequest) returns (AddResponse);
+    rpc delete (DeleteRequest) returns (DeleteResponse);
+    rpc show (ShowRequest) returns (ShowResponse);
+    rpc chat (stream ChatMessage) returns (stream google.protobuf.StringValue);
+
+}
